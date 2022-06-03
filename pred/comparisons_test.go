@@ -6,6 +6,28 @@ func intPtr(v int) *int {
 	return &v
 }
 
+func TestZeroNumber(t *testing.T) {
+	if Zero(1) || !Zero(0) {
+		t.Fail()
+	}
+}
+
+func TestZeroString(t *testing.T) {
+	if Zero("foo") || !Zero("") {
+		t.Fail()
+	}
+}
+
+func TestZeroStruct(t *testing.T) {
+	type foo struct {
+		a string
+	}
+
+	if Zero(foo{"hello"}) || !Zero(foo{}) {
+		t.Fail()
+	}
+}
+
 func TestGt(t *testing.T) {
 	fn := Gt(10)
 	if !fn(11) || fn(9) {

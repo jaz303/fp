@@ -2,6 +2,11 @@ package pred
 
 import "golang.org/x/exp/constraints"
 
+func Zero[T comparable](v T) bool {
+	var zero T
+	return v == zero
+}
+
 func Gt[T constraints.Ordered](v T) func(T) bool {
 	return func(x T) bool {
 		return x > v

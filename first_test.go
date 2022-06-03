@@ -1,38 +1,34 @@
 package fp
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/jaz303/fp/pred"
+)
 
 func TestFirstPresent(t *testing.T) {
-	v, ix := First(func(i int) bool {
-		return i > 10
-	}, []int{5, 10, 15, 20})
+	v, ix := First(pred.Gt(10), []int{5, 10, 15, 20})
 	if v != 15 || ix != 2 {
 		t.Fail()
 	}
 }
 
 func TestFirstMissing(t *testing.T) {
-	v, ix := First(func(i int) bool {
-		return i > 100
-	}, []int{5, 10, 15, 20})
+	v, ix := First(pred.Gt(100), []int{5, 10, 15, 20})
 	if v != 0 || ix != -1 {
 		t.Fail()
 	}
 }
 
 func TestFirstPtrPresent(t *testing.T) {
-	v, ix := FirstPtr(func(i *int) bool {
-		return *i > 10
-	}, []int{5, 10, 15, 20})
+	v, ix := FirstPtr(pred.GtPtr(10), []int{5, 10, 15, 20})
 	if *v != 15 || ix != 2 {
 		t.Fail()
 	}
 }
 
 func TestFirstPtrMissing(t *testing.T) {
-	v, ix := FirstPtr(func(i *int) bool {
-		return *i > 100
-	}, []int{5, 10, 15, 20})
+	v, ix := FirstPtr(pred.GtPtr(100), []int{5, 10, 15, 20})
 	if v != nil || ix != -1 {
 		t.Fail()
 	}

@@ -1,20 +1,20 @@
 package fp
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/jaz303/fp/pred"
+)
 
 func TestFilter(t *testing.T) {
-	out := Filter(func(i int) bool {
-		return i > 2
-	}, []int{1, 2, 3, 4})
+	out := Filter(pred.Gt(2), []int{1, 2, 3, 4})
 	if !Eq(out, []int{3, 4}) {
 		t.Fail()
 	}
 }
 
 func TestFilterPtr(t *testing.T) {
-	out := FilterPtr(func(i *int) bool {
-		return *i > 2
-	}, []int{1, 2, 3, 4})
+	out := FilterPtr(pred.GtPtr(2), []int{1, 2, 3, 4})
 	if !Eq(out, []int{3, 4}) {
 		t.Fail()
 	}
